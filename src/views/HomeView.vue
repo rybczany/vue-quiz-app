@@ -65,7 +65,6 @@ const checkAnswer = (answer: string | null) => {
       }
     }
     state.value.answers.push(answerData)
-    console.log(state.value.answers)
   }
 }
 
@@ -74,22 +73,20 @@ const loadQuiz = () => {
   loadData()
 }
 
-const nextQuestion = () => {
-  state.value.currentQuestionIndex++
-  console.log(state.value.currentQuestionIndex)
+const findCheckedAnswer = () => {
   checkedAnswer.value =
     state.value.answers.find((answer) => answer.questionIndex === state.value.currentQuestionIndex)
       ?.answer || null
-  console.log(checkedAnswer.value)
+}
+
+const nextQuestion = () => {
+  state.value.currentQuestionIndex++
+  findCheckedAnswer()
 }
 
 const previousQuestion = () => {
   state.value.currentQuestionIndex--
-  console.log(state.value.currentQuestionIndex)
-  checkedAnswer.value =
-    state.value.answers.find((answer) => answer.questionIndex === state.value.currentQuestionIndex)
-      ?.answer || null
-  console.log(checkedAnswer.value)
+  findCheckedAnswer()
 }
 
 const checkUserResult = () => {
@@ -118,8 +115,7 @@ const submitQuiz = () => {
   <section class="py-8 px-4 h-screen">
     <div class="lg:container m-auto">
       <h1 class="text-6xl font-bold mb-10">Quick Quiz</h1>
-      <div v-if="!startQuiz"
-      >
+      <div v-if="!startQuiz">
         <p class="mb-2">Join our quiz. Good fun is guaranteed!</p>
         <button
           @click="loadQuiz"
