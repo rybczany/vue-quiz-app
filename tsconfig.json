@@ -1,0 +1,18 @@
+{
+  "typeAcquisition": { "include": ["jest"] },
+  "compilerOptions": {
+    "types": ["jest", "node"],
+  },
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    },
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.vitest.json"
+    }
+  ]
+}
